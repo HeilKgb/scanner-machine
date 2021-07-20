@@ -47,7 +47,7 @@ def deskew(image):
 def match_template(image,template):
     return cv2.match_template(image,template,cv2.TM_CCOEFF_NORMED)
 
-image = cv2.imread(IMG_DIR + 'hitchhikers-rotated.png')
+image = cv2.imread(IMG_DIR + 'rg.jpg')
 #r,g,b = cv2.split(image)
 #rgb_img = cv2.merge([r,g,b])
 #plt.imshow(rgb_img)
