@@ -5,7 +5,7 @@ import pytesseract
 
 IMG_DIR = 'images/'
 
-img = cv2.imread(IMG_DIR +'poema.png')
+img = cv2.imread(IMG_DIR +'teste3.jpg')
 #img = cv2.imread(IMG_DIR+'certidao_1500.jpg')
 
 #redimensionar img
@@ -15,7 +15,7 @@ adaptive_threshold = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSI
 
 config = "--psm 4"
 
-text = pytesseract.image_to_string(img,config=config,lang='por')
+text = pytesseract.image_to_string(img)
 print(text)
 cv2.imshow('Img', img)
 cv2.imshow('gray', gray)

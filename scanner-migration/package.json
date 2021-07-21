@@ -1,0 +1,43 @@
+{
+  "name": "scanner",
+  "version": "0.1.0",
+  "description": "Capacity to scan and tread documents.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akivinicius/scanner.git"
+  },
+  "keywords": [],
+  "author": "Thiago Andrade Silva",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --pattern \"**/*.js\" --pattern \"**/*.json\""
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/akivinicius/scanner/issues"
+  },
+  "homepage": "https://github.com/akivinicius/scanner#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^5.1.2",
+    "amqplib": "^0.6.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-dependency-injection": "^2.6.7",
+    "sharp": "^0.25.4",
+    "tesseract.js": "^2.1.1",
+    "yup": "^0.29.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1"
+  }
+}

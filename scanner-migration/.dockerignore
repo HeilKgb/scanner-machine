@@ -1,0 +1,12 @@
+.dockerignore
+.env*
+.eslintrc.js
+.git
+.gitignore
+.prettierrc.json
+Dockerfile
+README.md
+
+coverage
+node_modules
+kubernetes-manifests
