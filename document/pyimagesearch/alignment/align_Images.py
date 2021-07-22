@@ -5,7 +5,7 @@ import cv2
 
 def align_images(image, template, maxFeatures=500, keepPercent=0.2, debug=False):
     imageGray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    templateGray = cv2.cvtColor(imageGray, cv2.COLOR_BGR2GRAY)
+    templateGray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
 
     orb = cv2.ORB_create(maxFeatures)
     (kpsA, descsA) = orb.detectAndCompute(imageGray, None)
@@ -24,13 +24,13 @@ def align_images(image, template, maxFeatures=500, keepPercent=0.2, debug=False)
             image, kpsA, template, kpsB, matches, None)
         matchedVis = imutils.resize(matchedVis, width=1000)
         cv2.imshow("Matched keyponts ", matchedVis)
-        cv2.waitKey(0)
+        cv2.waitKey(1000)
 
     ptsA = np.zeros((len(matches), 2), dtype="float")
     ptsB = np.zeros((len(matches), 2), dtype="float")
 
     for (i, m) in enumerate(matches):
-        ptsA[i] = kpsA[m.queryIndx].pt
+        ptsA[i] = kpsA[m.queryIdx].pt
         ptsB[i] = kpsB[m.trainIdx].pt
 
     (H, mask) = cv2.findHomography(ptsA, ptsB, method=cv2.RANSAC)
@@ -38,3 +38,5 @@ def align_images(image, template, maxFeatures=500, keepPercent=0.2, debug=False)
     aligned = cv2.warpPerspective(image, H, (w, h))
 
     return aligned
+
+

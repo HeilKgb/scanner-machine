@@ -1,5 +1,5 @@
 import cv2
-from pyimagesearch.alignment import align_images
+from pyimagesearch.alignment import align_Images
 import numpy as np
 import argparse
 import imutils
@@ -16,7 +16,7 @@ image = cv2.imread(args["image"])
 template = cv2.imread(args["template"])
 print("[INFO] aligning images...")
 
-aligned = align_images(image, template, debug=True)
+aligned = align_Images.align_images(image, template, debug=True)
 aligned = imutils.resize(aligned, width=700)
 template = imutils.resize(template, width=700)
 stacked = np.hstack([aligned, template])

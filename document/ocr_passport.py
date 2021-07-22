@@ -5,14 +5,9 @@ import cv2
 import pytesseract
 from imutils import paths
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True)
-ap.add_argument("-t", "--template", required=True)
-args = vars(ap.parse_args())
-
 
 def cleanup_text(text):
-    return "".join([c if ord(c) < 128 else "" for c in text]).strip()
+    return "".join([c if ord(c) < 255 else "" for c in text]).strip()
 
 
 # closing operation
@@ -20,7 +15,7 @@ rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (13, 5))
 sqKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (21, 21))
 
 
-image = cv2.imread('images/passaporte_1.jpg')
+image = cv2.imread('scans/cnh_5.jpg')
 image = imutils.resize(image, height=600)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # Gaussian blurring - educe high frequency noise.

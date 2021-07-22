@@ -27,9 +27,9 @@ print("vertical: ", vertical_flattened)
 print("horizontal: ", horizontal_flattened)
 
 
-#cv2.imshow('Vertical Image', cv2.resize(vertical, (500, 500), interpolation=0))
-#cv2.imshow("Vertical Flattened", cv2.resize(vertical_flattened, (500, 500), interpolation=0))
+cv2.imshow('Vertical Image', cv2.resize(vertical, (500, 500), interpolation=0))
+cv2.imshow("Vertical Flattened", cv2.resize(vertical_flattened, (500, 500), interpolation=0))
 
-#cv2.imshow('Horizontal Image', cv2.resize(horizontal, (500, 500), interpolation=0))
-#cv2.imshow("horizontal Flattened", cv2.resize(horizontal_flattened, (300, 500), interpolation=0))
-# cv2.waitKey(0)
+cv2.imshow('Horizontal Image', cv2.resize(horizontal, (500, 500), interpolation=0))
+cv2.imshow("horizontal Flattened", cv2.resize(horizontal_flattened, (300, 500), interpolation=0))
+cv2.waitKey(0)
