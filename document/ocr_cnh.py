@@ -4,6 +4,7 @@ import pytesseract
 import argparse
 import imutils
 import cv2
+from pytesseract import Output
 
 
 def cleanup_text(text):
@@ -21,22 +22,21 @@ args = vars(ap.parse_args())
 OCRLocation = namedtuple("OCRLocation", ["id", "bbox","filter_keywords"])
 
 OCR_LOCATIONS = [
-    OCRLocation("NOME", (85,71,395,29),
+    OCRLocation("NOME", (168,142,752,50),
                 ["meio", "inicial", "primeiro", "nome"]),
     # doc identidade/org emissor / uf
-    OCRLocation("DOC.IDENTIDADE", (250, 107, 227, 28),
+    OCRLocation("DOC.IDENTIDADE", (496,208,424,50),
                 ["uf","emissor","rg"]),
-    OCRLocation("CPF", (251,138,134,33),
+    OCRLocation("CPF", (490,278,242,50),
                 ["CPF"]),
-    OCRLocation("DATA NASCIMENTO", (382,138,99,33),
+    OCRLocation("DATA NASCIMENTO", (736,278,184,50),
                 ["data"]),
-    OCRLocation("FILIACAO", (251,171,229,89),
+    OCRLocation("FILIACAO", (488,342,432,158),
                 ["pai","mae"]),
-    OCRLocation("REGISTRO", (82,296,165,32), ["registro"]),
-    OCRLocation("primeira_habilitacao", (362,297,119,34), ["habilitacao"]),
-    OCRLocation("DATA EMISSAO", (364,530,115,37), ["data","emissao"]),
-    OCRLocation("ASSINATURA", (86,483,280,48), ["assinatura"]),
-    
+    OCRLocation("REGISTRO", (174,576,296,50), ["registro"]),
+    OCRLocation("primeira_habilitacao", (689,582,220,50), ["habilitacao"]),
+    OCRLocation("LOCAL", (174,1030,526,50), ["local"]),
+    OCRLocation("DATA EMISSAO", (700,1034,220,50), ["data","emissao"]),   
 ]
 
 
@@ -44,6 +44,13 @@ OCR_LOCATIONS = [
 print("[info] loading image")
 image = cv2.imread(args['image'])
 template = cv2.imread(args['template'])
+#mudar isso para um modulo 
+d = pytesseract.image_to_data(image,output_type=Output.DICT)
+n_boxes = len(d['level'])
+for i in range(n_boxes):
+    (x, y,w,h) = (d['left'][i],d['top'][i],d['width'][i],d['height'][i])
+    cv2.rectangle(image,(x, y), (x + w, y + h), (0, 255, 0), 2)
+
 print("[info] aligning image")
 aligned = align_Images.align_images(image, template,debug=True)
 
@@ -56,11 +63,13 @@ for loc in OCR_LOCATIONS:
     roi = aligned[y:y+h, x:x+w]
     rgb = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
     text = pytesseract.image_to_string(rgb)
+    print("aqui : ",text)
+#tirar esse for i in range(5), tentar colocar um else
 for i in range(5):
     for line in text.split("\n"):
-        if len(line) == 0:
+        if len(line) != 0:
             continue
-        lower = line.lower()
+        lower = line
         count = sum([lower.count(x) for x in loc.filter_keywords])
 
         if count == 0:

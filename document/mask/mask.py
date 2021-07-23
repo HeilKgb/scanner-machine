@@ -13,4 +13,3 @@ ap = argparse.ArgumentParser()
 ap.add_argument('-i','--image',required=True)
 args = vars(ap.parse_args())
 
-def mask(image, debug = False):

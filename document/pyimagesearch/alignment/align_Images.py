@@ -24,7 +24,7 @@ def align_images(image, template, maxFeatures=500, keepPercent=0.2, debug=False)
             image, kpsA, template, kpsB, matches, None)
         matchedVis = imutils.resize(matchedVis, width=1000)
         cv2.imshow("Matched keyponts ", matchedVis)
-        cv2.waitKey(1000)
+        cv2.waitKey(100)
 
     ptsA = np.zeros((len(matches), 2), dtype="float")
     ptsB = np.zeros((len(matches), 2), dtype="float")
