@@ -105,4 +105,4 @@ for (locID, result) in results.items():
 
 cv2.imshow('Input', imutils.resize(image, width=550))
 cv2.imshow('Output', imutils.resize(aligned, width=550))
-cv2.waitKey(100)
+cv2.waitKey(10000)

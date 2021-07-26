@@ -11,7 +11,8 @@
 
 # ap.add_argument('-i', '--image', required=True, help="path to input image that we'll align to template")
     - --image: entrada de uma imagem
-    - --template: o caminho para a imagem modelo 
+    - --template: o caminho para a imagem modelo
+    -  python3 ocr_cnh.py --image scans/chn.jpg --template scans/cnh_padrao.jpg
 
 # OCRLOCATION 
     - name: OCRLocation é o nome da tupla
@@ -55,4 +56,25 @@
     - se não houver resultado, armazenamos o text em line e loc no results 
     - caso exista, acrescentamos o line para qualquer existingText separados por uma nova linha e atualizamos o results
 
+# for (locID, result) in results.items():
+    - descompactar a tupla do OCR 
+    - descompactar text e loc 
+    - os reultados são impressos no terminal 
+    
+# (x, y, w, h) = loc["bbox"]
+    - extrair as coordenadas da caixa delimitadora do campo de texto 
+
+# clean = cleanup_text(text)
+    - texto limpo, com apenas os caracteres do ASCII
+
+# cv2.rectangle(aligned, (x, y), (x + w, y + h), (0, 255, 0), 2) 
+     - cria um retangulo verde ao redor das coordenadas
+
+   
+##  for (i, line) in enumerate(text.split("\n")):
+    - adiciona texto na imagem 
+
+# cv2.imshow('Input',imutils.resize(image, with= 550))
+# cv2.imshow('Output',imutils.resize(aligbed, with= 550))
+    - exibe a imagem original e o resultado das transformações 
     
